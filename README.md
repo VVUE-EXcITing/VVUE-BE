@@ -23,20 +23,29 @@
     </div>
   </p>
 </div>
-<br/>
 
 <h3 align="center"><strong>💙주요 기능💙</strong></h3>
 
 ✔️ 부부는 공유 일정(기념일, 부부 동반 약속)에 대한 리마인드 알림을 받는다.  
 ✔️ 공유 일정에 대해 추억을 작성할 수 있으며, 빅데이터 기술을 활용하여 장소를 추천받을 수 있다.  
 ✔️ 방문한 장소별로 추억을 회상할 수 있다.  
+<h3 align="center"><strong>💙아키텍처💙</strong></h3>
+<img src="docs/architecture.png">
 
-<h3 align="center"><strong>💙기술 선정 이유💙</strong></h3>
+<br/>
+<hr/>
+
+<h3 align="center"><strong>💙핵심 기술💙</strong></h3>
+<h4 align="center"><strong>기술 선정 이유</strong></h4>
 ✔️ 
+
+<h4 align="center"><strong>트러블 슈팅</strong></h4>
 ✔️ 
+<br />
 
 <h3 align="center"><strong>💙프로젝트 리뷰💙</strong></h3>
 ✔️ 
+<br />
 
 <!-- Developers -->
 <h3 align="center"><strong>💙담당 역할💙</strong></h3>
