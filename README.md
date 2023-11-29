@@ -24,31 +24,47 @@
   </p>
 </div>
 
-<h3 align="center"><strong>💙주요 기능💙</strong></h3>
+<h2 align="center"><strong>💙주요 기능💙</strong></h2>
 
 ✔️ 부부는 공유 일정(기념일, 부부 동반 약속)에 대한 리마인드 알림을 받는다.  
 ✔️ 공유 일정에 대해 추억을 작성할 수 있으며, 빅데이터 기술을 활용하여 장소를 추천받을 수 있다.  
 ✔️ 방문한 장소별로 추억을 회상할 수 있다.  
-<h3 align="center"><strong>💙아키텍처💙</strong></h3>
+<h2 align="center"><strong>💙아키텍처💙</strong></h2>
 <img src="docs/architecture.png">
+<br/> <br/>
 
-<br/>
-<hr/>
+<h2 align="center"><strong>💙핵심 기술💙</strong></h2>
+<h3 align="center"><strong>1. RDS - Hadoop 파이프라인</strong></h3>
 
-<h3 align="center"><strong>💙핵심 기술💙</strong></h3>
 <h4 align="center"><strong>기술 선정 이유</strong></h4>
 ✔️ 
+</br>
 
 <h4 align="center"><strong>트러블 슈팅</strong></h4>
 ✔️ 
-<br />
+<br/><br/>
 
-<h3 align="center"><strong>💙프로젝트 리뷰💙</strong></h3>
+---
+
+<h3 align="center"><strong>2. 추억 확인</strong></h3>
+<h4 align="center"><strong>기술 선정 이유</strong></h4>
 ✔️ 
+</br>
+
+<h4 align="center"><strong>트러블 슈팅</strong></h4>
+✔️ 
+<br/>
+<br/>
+
+
+<h2 align="center"><strong>💙프로젝트 리뷰💙</strong></h2>
+✔️ </br>
+✔️ </br>
+✔️ </br>
 <br />
 
 <!-- Developers -->
-<h3 align="center"><strong>💙담당 역할💙</strong></h3>
+<h2 align="center"><strong>💙담당 역할💙</strong></h2>
 
 <table align="center" stlye="width: 80%; table-layout: fixed;">
   <tr align="center">
@@ -63,15 +79,11 @@
   </tr>
   <tr align="center">
     <td style="text-align: center;">추억, 알림, <br/> 유저, 인증/인가, 개발 편의 </td>
-    <td style="text-align: center;">인프라 / 빅데이터 기술 / 부부 </td>
+    <td style="text-align: center;">인프라 / 빅데이터 기술 / 부부인증 </td>
     <td style="text-align: center;">빅데이터 기술 / 일정, 장소 </td>
   </tr>
 </table>
 
-
-<!-- LICENSE -->
-## **License**
-Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 <p align="right"><a href="#readme-top">back to top</a></p>
