@@ -37,8 +37,10 @@
 <h3 align="center"><strong>1. RDS - Hadoop 파이프라인</strong></h3>
 
 <h4 align="center"><strong>기술 선정 이유</strong></h4>
-✔️ 
-</br>
+✔️ Hadoop : 대용량 데이터 적재 </br>  
+✔️ Sqoop : RDS에서 장소 평점 데이터를 HDFS로 적재하기 위해 사용 </br>  
+✔️ Spark : 인메모리 방식으로 처리하는 Spark를 사용하여 Hadoop의 연산 속도를 보완 </br>  
+✔️ Airflow : 코드를 통해 파이프라인을 구현할 수 있음 </br>
 
 <h4 align="center"><strong>트러블 슈팅</strong></h4>
 ✔️ 
@@ -58,9 +60,8 @@
 
 
 <h2 align="center"><strong>💙프로젝트 리뷰💙</strong></h2>
-✔️ </br>
-✔️ </br>
-✔️ </br>
+✔️ 추천 기능 고도화 (유저 기반 필터링을 사용한 추천 기능) </br>
+✔️ 하둡 에코 시스템을 경험해볼 수 있었음 </br>
 <br />
 
 <!-- Developers -->
