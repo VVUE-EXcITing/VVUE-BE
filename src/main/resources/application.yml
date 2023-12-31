@@ -22,7 +22,7 @@ cloud:
       auto: false
   gcp:
     firebase:
-      service-account: classpath:firebase-service-account.json
+      service-account: file:firebase-service-account.json
 auth:
   google:
     client-id: ${GOOGLE_CLIENT_ID}
