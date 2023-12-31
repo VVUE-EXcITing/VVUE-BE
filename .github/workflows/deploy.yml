@@ -63,4 +63,4 @@ jobs:
         port: ${{ secrets.EC2_PORT }}
 
         script: |
-          docker compose -f up ${{secrets.DOCKER_COMPOSE_FILE_PATH}} -d
+          docker-compose up -f ${{secrets.DOCKER_COMPOSE_FILE_PATH}} -d
