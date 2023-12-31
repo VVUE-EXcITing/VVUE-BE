@@ -14,8 +14,8 @@ cloud:
       accessKey: ${AWS_IAM_ACCESSKEY}       # AWS IAM AccessKey 적기
       secretKey: ${AWS_IAM_SECRETKEY}   # AWS IAM SecretKey 적기
     s3:
-      bucket: vvue-bucket    # ex) marryting-gyunny
-      prefix: https://vvue-bucket.s3.ap-northeast-2.amazonaws.com/
+      bucket: vvue-s3    # ex) marryting-gyunny
+      prefix: https://vvue-s3.s3.ap-northeast-2.amazonaws.com/
     region:
       static: ap-northeast-2
     stack:
