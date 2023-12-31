@@ -6,6 +6,7 @@
 <h1 align="center"><strong>🤍쀼 : 보다 나은 우리를 위해🤍</strong></h1>
   <p align="center">
     <strong>부부 일정/추억 공유 애플리케이션</strong>
+    <div><a href="https://www.youtube.com/watch?v=yfxiEBpY8no">시연영상</a></div>
     <br />
     <!--https://ileriayo.github.io/markdown-badges/-->
     <div>
