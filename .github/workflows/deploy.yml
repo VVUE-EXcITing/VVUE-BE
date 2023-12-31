@@ -63,4 +63,8 @@ jobs:
         port: ${{ secrets.EC2_PORT }}
 
         script: |
+          if sudo docker ps -a | grep vvue-be-container; then sudo docker rm -f vvue-be-container; fi
+          if sudo docker images | grep ${{ secrets.DOCKERHUB_USERNAME }}/vvue-be-img; then sudo docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/vvue-be-img; fi
+          sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/vvue-be-img
+          sudo docker-compose down
           sudo docker-compose -f ${{secrets.DOCKER_COMPOSE_FILE_PATH}} up
