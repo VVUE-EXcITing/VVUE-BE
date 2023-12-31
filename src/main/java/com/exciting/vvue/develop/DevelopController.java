@@ -51,7 +51,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @RequiredArgsConstructor
 public class DevelopController {
-    @Value("${auth.kakao.test.api-key}") String api_key;
+    @Value("${auth.kakao.client-id}") String api_key;
 
     private final UserService userService;
     private final AuthService authService;

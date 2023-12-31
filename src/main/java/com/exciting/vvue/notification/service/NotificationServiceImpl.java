@@ -62,16 +62,6 @@ public class NotificationServiceImpl implements NotificationService {
             return;
         }
         log.debug("SENDBYTOKEN2{}" + notificationUser.isEmpty());
-//        String jsonString = null;
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        if (notificationReqDto.getData() != null) {
-//            try {
-//                jsonString = objectMapper.writeValueAsString(notificationReqDto.getData());
-//            } catch (IOException e) {
-//                log.debug("!!!" + e.getMessage());
-//                throw new NotificationFailException(e.getMessage());
-//            }
-//        }
         log.debug("[NOTIFY] 전");
 
         VvueNotification vvueNotification = VvueNotification.builder()
@@ -84,37 +74,15 @@ public class NotificationServiceImpl implements NotificationService {
         vvueNotificationRepository.save(vvueNotification);
         log.debug("[NOTIFY]" + vvueNotification);
         // title, body, image
-        firebaseCloudMessageService.sendMessageTo(notificationUser.get().getFirebaseToken(),
-            notificationReqDto.getContent().getTitle(),
-            notificationReqDto.getContent().getBody());
-
-
-
-//        Message message = Message.builder()
-//            .putData("score","850")
-//            .putData("time","2:45")
-//            .setToken(notificationUser.get().getFirebaseToken())
-////            .setNotification(Notification.builder()
-////                .setTitle(notificationReqDto.getContent().getTitle())
-////                .setBody(notificationReqDto.getContent().getBody())
-////                .setImage(notificationReqDto.getContent().getImage())
-////                .build())
-//            //.putAllData(notificationReqDto.getData())// title, body, image
-//            .build();
-//        log.debug(">>>>>\t"+message.toString());
-//        try {
-//            log.debug("TRY");
-//            log.debug(firebaseMessaging.toString());
-//            String response = firebaseMessaging.send(message);
-//            log.debug(response);
-//
-//        } catch (FirebaseMessagingException e) {
-//            log.debug("FIREBASEMESSAGINGEXCEPTION"+e.getMessage());
-//            log.debug(e.getCause().getMessage());
-//            throw new NotificationFailException(
-//                "알림 보내기를 실패하였습니다. target=" + notificationUser.get().getUserId());
-//        }
-
+//        firebaseCloudMessageService.sendMessageTo(notificationUser.get().getFirebaseToken(),
+//            notificationReqDto.getContent().getTitle(),
+//            notificationReqDto.getContent().getBody());
+        Message message = Message.builder()
+                .putData("title", notificationReqDto.getContent().getTitle())
+                .putData("body", notificationReqDto.getContent().getBody())
+                .setToken(notificationUser.get().getFirebaseToken())
+                .build();
+        FirebaseMessaging.getInstance().sendAsync(message);
     }
 
     @Override
