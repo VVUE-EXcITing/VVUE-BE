@@ -4,6 +4,9 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import lombok.RequiredArgsConstructor;
@@ -20,17 +23,13 @@ public class FirebaseConfig {
 
     @Bean
     GoogleCredentials googleCredentials() {
-        try {
-            if (firebaseProperties.getServiceAccount() != null) {
-                try (InputStream is = firebaseProperties.getServiceAccount().getInputStream()) {
-                    return GoogleCredentials.fromStream(is);
-                }
-            } else {
-                // Use standard credentials chain. Useful when running inside GKE
-                return GoogleCredentials.getApplicationDefault();
-            }
-        } catch (IOException ioe) {
-            throw new RuntimeException(ioe);
+        String filePath = System.getenv("GOOGLE_APPLICATION_CREDENTIALS");
+
+        // 파일을 읽어오기 위해 FileInputStream 사용
+        try (InputStream serviceAccount = new FileInputStream(filePath)) {
+            return GoogleCredentials.fromStream(serviceAccount);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
