@@ -4,7 +4,7 @@ spring:
 
 server:
   servlet:
-    context-path: /api/v1
+    context-path: /back/api
   port:
     8080
 
