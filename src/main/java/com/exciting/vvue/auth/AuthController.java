@@ -12,8 +12,7 @@ import com.exciting.vvue.auth.oauth.model.dto.OAuthUserInfoDto;
 import com.exciting.vvue.auth.service.AuthService;
 import com.exciting.vvue.user.model.User;
 import com.exciting.vvue.user.service.UserService;
-import io.swagger.annotations.ApiOperation;
-import java.time.LocalDate;
+
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

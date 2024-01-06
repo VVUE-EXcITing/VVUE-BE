@@ -10,7 +10,7 @@ import com.exciting.vvue.user.model.dto.UserDto;
 import com.exciting.vvue.user.model.dto.UserInfoUpdated;
 import com.exciting.vvue.user.model.dto.UserModifyDto;
 import com.exciting.vvue.user.service.UserService;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -33,7 +33,7 @@ public class UserController {
     private final UserService userService;
     private final MarriedService marriedService;
 
-    @ApiOperation(value = "모든 정보(부부연결유무/유저정보-성별,생일,닉네임")
+    @Operation(description ="모든 정보(부부연결유무/유저정보-성별,생일,닉네임")
     @GetMapping("/all-info-updated")
     public ResponseEntity<?> isAllAuthenticated(@RequestHeader("Authorization") String token) {
         Long id = authService.getUserIdFromToken(token);
@@ -46,7 +46,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userAuthenticated);
     }
 
-    @ApiOperation(value = "추가 정보(성별,생일,닉네임) 입력했는지 여부 확인")
+    @Operation(description ="추가 정보(성별,생일,닉네임) 입력했는지 여부 확인")
     @GetMapping("/user-info-updated")
     public ResponseEntity<?> isAuthenticated(@RequestHeader("Authorization") String token) {
         Long id = authService.getUserIdFromToken(token);
@@ -55,15 +55,16 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userAuthenticated);
     }
 
-    @ApiOperation(value = "유저 정보 조회")
+    @Operation(description ="유저 정보 조회")
     @GetMapping
     public ResponseEntity<UserDto> getUserInfoByToken(
         @RequestHeader("Authorization") String token) {
+        log.debug("유저 정보 조회"+token);
         Long id = authService.getUserIdFromToken(token);
         UserDto userResDto = userService.getUserDto(id);
         return new ResponseEntity<>(userResDto, HttpStatus.OK);
     }
-    @ApiOperation(value = "유저 정보(성별,생일,닉네임,프로필사진ID) 수정")
+    @Operation(description ="유저 정보(성별,생일,닉네임,프로필사진ID) 수정")
     @PutMapping
     public ResponseEntity<?> modify(@RequestHeader("Authorization") String token,
         @RequestBody UserModifyDto userModifyDto) {
@@ -72,7 +73,7 @@ public class UserController {
         userService.modifyUser(userId, userModifyDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @ApiOperation(value = "[TODO] 유저 삭제")
+    @Operation(description ="[TODO] 유저 삭제")
     @DeleteMapping
     public ResponseEntity<?> delete(@RequestHeader("Authorization") String token) {
         Long id = authService.getUserIdFromToken(token);

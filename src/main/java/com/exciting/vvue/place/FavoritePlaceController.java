@@ -4,9 +4,9 @@ import com.exciting.vvue.auth.service.AuthService;
 import com.exciting.vvue.place.model.dto.PlaceReqDto;
 import com.exciting.vvue.place.service.FavoritePlaceService;
 import com.exciting.vvue.place.service.PlaceService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +23,13 @@ public class FavoritePlaceController {
     private final AuthService authService;
 
     @PostMapping
-    @ApiOperation(value = "즐겨찾기 상태 변경", notes = "즐겨찾기의 상태를 변경한다.")
+    @Operation(description ="즐겨찾기 상태 변경", summary = "즐겨찾기의 상태를 변경한다.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "요청 성공")
-            , @ApiResponse(code = 202, message = "요청 성공, place 등록 필요")
-            , @ApiResponse(code = 400, message = "잘못된 필드, 값 요청")
-            , @ApiResponse(code = 401, message = "로그인되지 않은 사용자")
-            , @ApiResponse(code = 500, message = "DB 서버 에러")
+            @ApiResponse(responseCode = "200", description = "요청 성공")
+            , @ApiResponse(responseCode = "202", description = "요청 성공, place 등록 필요")
+            , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
+            , @ApiResponse(responseCode = "401", description = "로그인되지 않은 사용자")
+            , @ApiResponse(responseCode = "500", description = "DB 서버 에러")
     })
 
     public ResponseEntity<?> changeScrap(@RequestHeader("Authorization") String token, @RequestParam Long mapPlaceId){
@@ -52,12 +52,12 @@ public class FavoritePlaceController {
     }
 
     @PostMapping("/regist")
-    @ApiOperation(value = "장소 등록 및 즐겨찾기 하기", notes = "장소를 등록하고 즐겨찾기한 상태로 변경.")
+    @Operation(description ="장소 등록 및 즐겨찾기 하기", summary = "장소를 등록하고 즐겨찾기한 상태로 변경.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "요청 성공")
-            , @ApiResponse(code = 400, message = "잘못된 필드, 값 요청")
-            , @ApiResponse(code = 401, message = "로그인되지 않은 사용자")
-            , @ApiResponse(code = 500, message = "DB 서버 에러")
+            @ApiResponse(responseCode = "200", description = "요청 성공")
+            , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
+            , @ApiResponse(responseCode = "401", description = "로그인되지 않은 사용자")
+            , @ApiResponse(responseCode = "500", description = "DB 서버 에러")
     })
     public ResponseEntity<?> scrapAndAdd(@RequestHeader("Authorization") String token, @RequestBody PlaceReqDto placeReqDto){
         Long userId = authService.getUserIdFromToken(token);
