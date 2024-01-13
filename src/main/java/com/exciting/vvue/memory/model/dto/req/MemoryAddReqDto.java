@@ -18,7 +18,9 @@ import lombok.*;
 public class MemoryAddReqDto {
     @NotNull(message="[필수] scheduleId")
     private Long scheduleId; //어떤 스캐줄에 대한 추억
+    @NotNull(message="[필수] scheduleName")
     private String scheduleName;
+    @NotNull(message="[필수] scheduleDate")
     private LocalDate scheduleDate;
 
     @NotBlank(message="[필수] comment")
