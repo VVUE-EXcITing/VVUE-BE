@@ -3,6 +3,11 @@ package com.exciting.vvue.married;
 import com.exciting.vvue.married.model.dto.res.MarriedInfoExist;
 import javax.transaction.Transactional;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +29,6 @@ import com.exciting.vvue.married.service.MarriedService;
 import com.exciting.vvue.schedule.model.dto.ScheduleReqDto;
 import com.exciting.vvue.schedule.service.ScheduleService;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,10 +41,10 @@ public class MarriedController {
 	private final AuthService authService;
 	private final ScheduleService scheduleService;
 
-	@ApiOperation(value = "user의 부부정보 가져오기")
+	@Operation(description = "user의 부부정보 가져오기")
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "성공", response = MarriedDto.class),
-		@ApiResponse(code = 404, message = "부부가 아님")
+		@ApiResponse(responseCode  = "200", description = "성공", content= {@Content(schema = @Schema(implementation =  MarriedDto.class))}),
+		@ApiResponse(responseCode  = "404", description = "부부가 아님")
 	})
 	@GetMapping("/info")
 	public ResponseEntity<?> getMarriedInfo(@RequestHeader("Authorization") String token){
@@ -63,7 +65,7 @@ public class MarriedController {
 
 
 	@PutMapping("/info")
-	@ApiOperation(value = "부부 정보 수정", notes = "결혼기념일 미수정시 null로, 사진 미수정시 0 이하의 값으로 보낼 것")
+	@Operation(description = "부부 정보 수정", summary = "결혼기념일 미수정시 null로, 사진 미수정시 0 이하의 값으로 보낼 것")
 	// @ApiImplicitParam(name = "marriedModifyDto", value = "marriedModifyDto")
 	public ResponseEntity<?> updateMarriedInfo(@RequestHeader("Authorization") String token, @RequestBody MarriedModifyDto marriedModifyDto){
 		Long id = authService.getUserIdFromToken(token);
@@ -83,7 +85,7 @@ public class MarriedController {
 
 //	@Transactional
 //	@PostMapping()
-//	@ApiOperation(value = "부부 정보 생성", notes = "부부 정보 생성")
+//	@Operation(description ="부부 정보 생성", summary = "부부 정보 생성")
 //	@Deprecated
 //	// @ApiImplicitParam(name = "marriedCreateDto", dataTypeClass = MarriedCreateDto.class, value = "배우자 id, 결혼기념일 ")
 //	public ResponseEntity<?> createMarried(@RequestHeader("Authorization") String token, @RequestBody MarriedCreateDto marriedCreateDto){
@@ -98,7 +100,7 @@ public class MarriedController {
 //	}
 
 	@GetMapping("/is-married")
-	@ApiOperation(value = "부부 정보가 있는지 확인", notes = "")
+	@Operation(description = "부부 정보가 있는지 확인", summary = "")
 	public ResponseEntity<?> isUserMarried(@RequestHeader("Authorization") String token){
 		Long userId = authService.getUserIdFromToken(token);
 		log.debug("[POST] /married/is-married : id " + userId);

@@ -1,51 +1,47 @@
 package com.exciting.vvue.common.config;
 
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.Arrays;
+
 
 @Configuration
-@EnableSwagger2
 public class SwaggerConfig {
     @Bean
-    public Docket api(){
-        return new Docket(DocumentationType.SWAGGER_2)
-                .consumes(getConsumeContentTypes())
-                .produces(getProduceContentTypes())
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.exciting.vvue"))
-                .paths(PathSelectors.any()).build().useDefaultResponseMessages(false);
-    }
-
-    private ApiInfo apiInfo(){
-        return new ApiInfoBuilder()
-                .title("Vvue Spring Boot REST API")
-                .version("1.0.0")
-                .description("Vvue의 swagger api 입니다.")
+    public GroupedOpenApi group(){
+        return GroupedOpenApi.builder()
+                .group("vvue apis")
+                .packagesToScan("com.exciting.vvue")
                 .build();
     }
+    @Bean
+    public GroupedOpenApi developGroup() {
+        return GroupedOpenApi.builder()
+                .group("develop apis")
+                .packagesToScan("com.exciting.vvue.develop") // package 필터 설정
+                .build();
+    }
+    @Bean
+    public OpenAPI springOpenApi(){
+        SecurityScheme securityScheme = new SecurityScheme()
+                .type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
+                .in(SecurityScheme.In.HEADER).name("Authorization");
+        SecurityRequirement securityRequirement = new SecurityRequirement().addList("bearerAuth");
 
-    private Set<String> getConsumeContentTypes() {
-        Set<String> consumes = new HashSet<>();
-        consumes.add("application/json;charset=UTF-8");
-        consumes.add("application/x-www-form-urlencoded");
-        return consumes;
+        return new OpenAPI().components(new Components().addSecuritySchemes("bearerAuth",securityScheme)).security(Arrays.asList(securityRequirement))
+                .info(new Info()
+                .title("vvue REST API")
+                .version("1.0.0")
+                .description("vvue swagger api 입니다."));
     }
 
-    private Set<String> getProduceContentTypes() {
-        Set<String> produces = new HashSet<>();
-        produces.add("application/json;charset=UTF-8");
-        return produces;
-    }
 
 }

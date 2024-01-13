@@ -2,8 +2,7 @@ package com.exciting.vvue.married.model.dto.req;
 
 import java.time.LocalDate;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-@ApiModel(value = "부부 연결을 위한 정보", description = "배우자 userId, 결혼 기념일")
+@Schema(name = "부부 연결을 위한 정보", description = "배우자 userId, 결혼 기념일")
 public class MarriedCreateDto {
 	//@ApiModelProperty(value = "배우자 userId", dataType = "Long, int", required = true)
 	Long partnerId;

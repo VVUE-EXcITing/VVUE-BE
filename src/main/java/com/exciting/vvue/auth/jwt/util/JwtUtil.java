@@ -5,6 +5,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.security.Key;
 import java.util.Date;
@@ -62,7 +63,12 @@ public class JwtUtil {
         log.debug("claims: {}", claims);
         return !isTokenExpired(jwt);
     }
-
+    public  String removeBearer(String bearerToken){
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.replace("Bearer ", "");
+        }
+        return bearerToken;
+    }
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }

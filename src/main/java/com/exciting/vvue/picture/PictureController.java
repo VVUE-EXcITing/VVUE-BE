@@ -6,6 +6,11 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,9 +34,6 @@ import com.exciting.vvue.picture.service.PictureService;
 import com.exciting.vvue.user.exception.UserNotFoundException;
 import com.exciting.vvue.user.service.UserService;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,11 +47,11 @@ public class PictureController {
 	private final UserService userService;
 	@Transactional
 	@PostMapping("/upload/multi")
-	@ApiOperation(value = "사진 여러장 업로드", notes = "장소 추억 전용")
+	@Operation(description ="사진 여러장 업로드", summary = "장소 추억 전용")
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "업로드 성공", response = PictureMultiUploadResDto.class),
-		@ApiResponse(code = 400, message = "업로드 실패"),
-		@ApiResponse(code = 404, message = "유저를 찾을 수 없음")
+		@ApiResponse(responseCode = "200", description = "업로드 성공",  content = {@Content(schema = @Schema(implementation = PictureMultiUploadResDto.class))}),
+		@ApiResponse(responseCode = "400", description = "업로드 실패"),
+		@ApiResponse(responseCode = "404", description = "유저를 찾을 수 없음")
 	})
 	public ResponseEntity<?> uploadMulti(
 		@RequestHeader("Authorization")String token,
@@ -95,11 +97,11 @@ public class PictureController {
 
 	@Transactional
 	@PostMapping("/upload/single")
-	@ApiOperation(value = "사진 1장 업로드", notes = "프로필 변경, 부부공유 사진 변경")
+	@Operation(description ="사진 1장 업로드", summary = "프로필 변경, 부부공유 사진 변경")
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "업로드 성공", response = PictureSingleUploadResDto.class),
-		@ApiResponse(code = 400, message = "업로드 실패"),
-		@ApiResponse(code = 404, message = "유저를 찾을 수 없음")
+		@ApiResponse(responseCode = "200", description = "업로드 성공",  content = {@Content(schema = @Schema(implementation = PictureSingleUploadResDto.class))}),
+		@ApiResponse(responseCode = "400", description = "업로드 실패"),
+		@ApiResponse(responseCode = "404", description = "유저를 찾을 수 없음")
 	})
 	public ResponseEntity<?> uploadSingle(
 		@RequestHeader("Authorization")String token,
@@ -133,11 +135,11 @@ public class PictureController {
 
 	@Transactional
 	@DeleteMapping("/single/{pictureId}")
-	@ApiOperation(value = "사진 1장 삭제", notes = "사진 삭제")
+	@Operation(description ="사진 1장 삭제", summary = "사진 삭제")
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "삭제 성공"),
-		@ApiResponse(code = 400, message = "삭제 실패"),
-		@ApiResponse(code = 404, message = "유저를 찾을 수 없음"),
+		@ApiResponse(responseCode = "200", description = "삭제 성공"),
+		@ApiResponse(responseCode = "400", description = "삭제 실패"),
+		@ApiResponse(responseCode = "404", description = "유저를 찾을 수 없음"),
 	})
 	public ResponseEntity<?> delete(@RequestHeader("Authorization")String token, @PathVariable("pictureId") Long id){
 		if(userService.getUserById(authService.getUserIdFromToken(token)) == null )
@@ -150,11 +152,11 @@ public class PictureController {
 
 	@Transactional
 	@DeleteMapping("/multi")
-	@ApiOperation(value = "사진 여러장 삭제", notes = "사진 삭제")
+	@Operation(description ="사진 여러장 삭제", summary = "사진 삭제")
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "삭제 성공"),
-		@ApiResponse(code = 404, message = "삭제 실패"),
-		@ApiResponse(code = 404, message = "유저를 찾을 수 없음")
+		@ApiResponse(responseCode = "200", description = "삭제 성공"),
+		@ApiResponse(responseCode = "404", description = "삭제 실패"),
+		@ApiResponse(responseCode = "404", description = "유저를 찾을 수 없음")
 	})
 	public ResponseEntity<?> deleteMulti(@RequestHeader("Authorization")String token, @RequestBody PictureIdList pictureIdList){
 		if(userService.getUserById(authService.getUserIdFromToken(token)) == null )

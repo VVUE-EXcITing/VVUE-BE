@@ -17,13 +17,14 @@ import com.exciting.vvue.schedule.model.dto.ScheduleResDto;
 import com.exciting.vvue.schedule.service.ScheduleService;
 import com.exciting.vvue.user.model.User;
 import com.exciting.vvue.user.service.UserService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -53,14 +54,14 @@ public class ScheduleController {
     private final UserService userService;
 
     @GetMapping("/{scheduleId}")
-    @ApiOperation(value = "일정 상세 조회", notes = "해당 일정 상세 정보를 조회한다.")
+    @Operation(description ="일정 상세 조회", summary = "해당 일정 상세 정보를 조회한다.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "요청 성공")
-            , @ApiResponse(code = 400, message = "잘못된 필드, 값 요청")
-            , @ApiResponse(code = 401, message = "로그인되지 않은 사용자")
-            , @ApiResponse(code = 403, message = "권한 없음")
-            , @ApiResponse(code = 404, message = "해당 일정이 존재하지 않음")
-            , @ApiResponse(code = 500, message = "DB 서버 에러")
+            @ApiResponse(responseCode = "200", description = "요청 성공")
+            , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
+            , @ApiResponse(responseCode = "401", description = "로그인되지 않은 사용자")
+            , @ApiResponse(responseCode = "403", description = "권한 없음")
+            , @ApiResponse(responseCode = "404", description = "해당 일정이 존재하지 않음")
+            , @ApiResponse(responseCode = "500", description = "DB 서버 에러")
     })
     public ResponseEntity<ScheduleResDto> get(@RequestHeader("Authorization") String token,
                                               @PathVariable("scheduleId") Long scheduleId) {
@@ -76,13 +77,13 @@ public class ScheduleController {
     }
 
     @PostMapping
-    @ApiOperation(value = "일정 등록", notes = "일정을 등록한다.")
+    @Operation(description ="일정 등록", summary = "일정을 등록한다.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "요청 성공")
-            , @ApiResponse(code = 400, message = "잘못된 필드, 값 요청")
-            , @ApiResponse(code = 401, message = "로그인되지 않은 사용자")
-            , @ApiResponse(code = 403, message = "권한 없음")
-            , @ApiResponse(code = 500, message = "DB 서버 에러")
+            @ApiResponse(responseCode = "200", description = "요청 성공")
+            , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
+            , @ApiResponse(responseCode = "401", description = "로그인되지 않은 사용자")
+            , @ApiResponse(responseCode = "403", description = "권한 없음")
+            , @ApiResponse(responseCode = "500", description = "DB 서버 에러")
     })
     public ResponseEntity<?> add(@RequestHeader("Authorization") String token,
         @RequestBody ScheduleReqDto scheduleReqDto) {
@@ -116,11 +117,11 @@ public class ScheduleController {
     }
 
     @PostMapping("/marry")
-    @ApiOperation(value = "기념일 생일 등록", notes = "부부 가입 시 기념일 생일을 일정으로 등록한다.")
+    @Operation(description ="기념일 생일 등록", summary = "부부 가입 시 기념일 생일을 일정으로 등록한다.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "요청 성공")
-            , @ApiResponse(code = 400, message = "잘못된 필드, 값 요청")
-            , @ApiResponse(code = 401, message = "로그인되지 않은 사용자")
+            @ApiResponse(responseCode = "200", description = "요청 성공")
+            , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
+            , @ApiResponse(responseCode = "401", description = "로그인되지 않은 사용자")
     })
     public ResponseEntity<String> addMarry(@RequestHeader("Authorization") String token) {
         log.debug("[POST] /schedules/married");
@@ -130,14 +131,14 @@ public class ScheduleController {
     }
 
     @PutMapping("/{scheduleId}")
-    @ApiOperation(value = "일정 수정", notes = "해당 일정을 수정한다.")
+    @Operation(description ="일정 수정", summary = "해당 일정을 수정한다.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "요청 성공")
-            , @ApiResponse(code = 400, message = "잘못된 필드, 값 요청")
-            , @ApiResponse(code = 401, message = "로그인되지 않은 사용자")
-            , @ApiResponse(code = 403, message = "권한 없음")
-            , @ApiResponse(code = 404, message = "해당 일정이 존재하지 않음")
-            , @ApiResponse(code = 500, message = "DB 서버 에러")
+            @ApiResponse(responseCode = "200", description = "요청 성공")
+            , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
+            , @ApiResponse(responseCode = "401", description = "로그인되지 않은 사용자")
+            , @ApiResponse(responseCode = "403", description = "권한 없음")
+            , @ApiResponse(responseCode = "404", description = "해당 일정이 존재하지 않음")
+            , @ApiResponse(responseCode = "500", description = "DB 서버 에러")
     })
     public ResponseEntity<?> modify(@RequestHeader("Authorization") String token,
                                          @PathVariable("scheduleId") Long scheduleId, @RequestBody ScheduleReqDto scheduleReqDto) {
@@ -170,14 +171,14 @@ public class ScheduleController {
     }
 
     @DeleteMapping("/{scheduleId}")
-    @ApiOperation(value = "일정 삭제", notes = "해당 일정을 논리 삭제한다.")
+    @Operation(description ="일정 삭제", summary = "해당 일정을 논리 삭제한다.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "요청 성공")
-            , @ApiResponse(code = 400, message = "잘못된 필드, 값 요청")
-            , @ApiResponse(code = 401, message = "로그인되지 않은 사용자")
-            , @ApiResponse(code = 403, message = "권한 없음")
-            , @ApiResponse(code = 404, message = "해당 일정이 존재하지 않음")
-            , @ApiResponse(code = 500, message = "DB 서버 에러")
+            @ApiResponse(responseCode = "200", description = "요청 성공")
+            , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
+            , @ApiResponse(responseCode = "401", description = "로그인되지 않은 사용자")
+            , @ApiResponse(responseCode = "403", description = "권한 없음")
+            , @ApiResponse(responseCode = "404", description = "해당 일정이 존재하지 않음")
+            , @ApiResponse(responseCode = "500", description = "DB 서버 에러")
     })
     public ResponseEntity<String> delete(@RequestHeader("Authorization") String token,
                                          @PathVariable("scheduleId") Long scheduleId) {
@@ -210,12 +211,12 @@ public class ScheduleController {
     }
 
     @GetMapping("/calendar")
-    @ApiOperation(value = "달력 조회", notes = "해당 달의 일정 있는 날짜 리스트를 조회한다.")
+    @Operation(description ="달력 조회", summary = "해당 달의 일정 있는 날짜 리스트를 조회한다.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "요청 성공")
-            , @ApiResponse(code = 400, message = "잘못된 필드, 값 요청")
-            , @ApiResponse(code = 401, message = "로그인되지 않은 사용자")
-            , @ApiResponse(code = 500, message = "DB 서버 에러")
+            @ApiResponse(responseCode = "200", description = "요청 성공")
+            , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
+            , @ApiResponse(responseCode = "401", description = "로그인되지 않은 사용자")
+            , @ApiResponse(responseCode = "500", description = "DB 서버 에러")
     })
     public ResponseEntity<List<String>> getCalendar(@RequestHeader("Authorization") String token,
                                                     @RequestParam("year") int year, @RequestParam("month") int month) {
@@ -228,12 +229,12 @@ public class ScheduleController {
     }
 
     @GetMapping("/calendar-daily")
-    @ApiOperation(value = "특정 날짜 일정 조회", notes = "해당 날짜의 일정 리스트를 조회한다.")
+    @Operation(description ="특정 날짜 일정 조회", summary = "해당 날짜의 일정 리스트를 조회한다.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "요청 성공")
-            , @ApiResponse(code = 400, message = "잘못된 필드, 값 요청")
-            , @ApiResponse(code = 401, message = "로그인되지 않은 사용자")
-            , @ApiResponse(code = 500, message = "DB 서버 에러")
+            @ApiResponse(responseCode = "200", description = "요청 성공")
+            , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
+            , @ApiResponse(responseCode = "401", description = "로그인되지 않은 사용자")
+            , @ApiResponse(responseCode = "500", description = "DB 서버 에러")
     })
     public ResponseEntity<List<ScheduleDailyResDto>> getDaily(
             @RequestHeader("Authorization") String token,
@@ -249,12 +250,12 @@ public class ScheduleController {
     }
 
     @GetMapping("/dday")
-    @ApiOperation(value = "D-DAY 일정 조회", notes = "예정된 일정 목록을 조회한다.")
+    @Operation(description ="D-DAY 일정 조회", summary = "예정된 일정 목록을 조회한다.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "요청 성공")
-            , @ApiResponse(code = 400, message = "잘못된 필드, 값 요청")
-            , @ApiResponse(code = 401, message = "로그인되지 않은 사용자")
-            , @ApiResponse(code = 500, message = "DB 서버 에러")
+            @ApiResponse(responseCode = "200", description = "요청 성공")
+            , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
+            , @ApiResponse(responseCode = "401", description = "로그인되지 않은 사용자")
+            , @ApiResponse(responseCode = "500", description = "DB 서버 에러")
     })
     public ResponseEntity<?> getDday(@RequestHeader("Authorization") String token,
                                      @RequestParam("idCursor") long idCursor, @RequestParam("size") int size) {

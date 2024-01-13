@@ -5,11 +5,14 @@ import com.exciting.vvue.auth.jwt.util.JwtUtil;
 import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @Slf4j
 @Component
@@ -27,9 +30,11 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         log.debug("request : " + request.getHeader(HEADER_AUTH));
 
-        final String token = request.getHeader(HEADER_AUTH);
+        final String header = request.getHeader(HEADER_AUTH);
 
-        log.debug("Interceptor token = " + token);
+        log.debug("Interceptor token = " + header);
+        String bearerToken = request.getHeader(HttpHeaders.AUTHORIZATION);
+        String token = jwtUtil.removeBearer(bearerToken);
 
         if(token == null || token.isBlank()){
             throw new InvalidTokenException("토큰 잘못됨");
@@ -46,5 +51,8 @@ public class JwtInterceptor implements HandlerInterceptor {
         }
 
         throw new InvalidTokenException("토큰 잘못됨");
+
     }
+
+
 }

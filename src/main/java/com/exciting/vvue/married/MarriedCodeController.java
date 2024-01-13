@@ -1,7 +1,11 @@
 package com.exciting.vvue.married;
 
-import java.time.LocalDate;
-
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +26,6 @@ import com.exciting.vvue.married.service.MarriedCodeService;
 import com.exciting.vvue.married.service.MarriedService;
 import com.exciting.vvue.user.service.UserService;
 
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,10 +42,10 @@ public class MarriedCodeController {
 	private final int CODE_LENGTH = 8;
 	// 부부 인증 코드 발급
 	@GetMapping("/generate")
-	@ApiOperation(value="부부 인증 코드 발급 (자신 id로)",notes = "부부 인증 코드를 발급한다")
+	@Operation(summary="부부 인증 코드 발급 (자신 id로)",description = "부부 인증 코드를 발급한다")
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "성공", response = MarriedCode.class),
-		@ApiResponse(code = 404, message = "인증코드 생성실패"),
+		@ApiResponse(responseCode = "200", description = "성공",   content = {@Content(schema = @Schema(implementation = MarriedCode.class))}),
+		@ApiResponse(responseCode = "404", description = "인증코드 생성실패"),
 	})
 	public ResponseEntity<?> getMarriedAuthCode(@RequestHeader("Authorization") String token){
 		/**
@@ -70,11 +70,11 @@ public class MarriedCodeController {
 	}
 
 	@GetMapping("/regenerate")
-	@ApiOperation(value="부부 인증 코드 재발급", notes="인증 코드 시간 만료 시 자동 호출 + 버튼 눌렀을 때 호출")
-	@ApiImplicitParam(name="marriedCode",value = "전에 발급된 부부인증코드", required = true)
+	@Operation(summary="부부 인증 코드 재발급", description="인증 코드 시간 만료 시 자동 호출 + 버튼 눌렀을 때 호출")
+	@Parameter(name="marriedCode",description = "전에 발급된 부부인증코드", required = true)
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "성공", response = MarriedCode.class),
-		@ApiResponse(code = 404, message = "인증코드 생성실패"),
+		@ApiResponse(responseCode = "200", description = "성공",   content = {@Content(schema = @Schema(implementation = MarriedCode.class))}),
+		@ApiResponse(responseCode = "404", description = "인증코드 생성실패"),
 	})
 	public ResponseEntity<?> regenerateAuthCode(@RequestHeader("Authorization") String token, @RequestParam String marriedCode){
 		/**
@@ -98,12 +98,12 @@ public class MarriedCodeController {
 	}
 
 	@PostMapping("/connect")
-	@ApiOperation(value = "인증 코드 일치 확인", notes = "인증 코드 발급한 유저와 부부 정보 생성")
+	@Operation(summary = "인증 코드 일치 확인", description = "인증 코드 발급한 유저와 부부 정보 생성")
 	// @ApiImplicitParam(name = "marriedCode", value = "입력한 인증코드", required = true)
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "성공", response = Long.class ),
-		@ApiResponse(code = 400, message = "자신 인증코드 입력, 이미 부부 정보가 있는 사람과 연동 시도"),
-		@ApiResponse(code = 404, message = "redis에 인증 코드 없음"),
+		@ApiResponse(responseCode = "200", description = "성공",   content = {@Content(schema = @Schema(implementation = Long.class))}),
+		@ApiResponse(responseCode = "400", description = "자신 인증코드 입력, 이미 부부 정보가 있는 사람과 연동 시도"),
+		@ApiResponse(responseCode = "404", description = "redis에 인증 코드 없음"),
 	})
 	public ResponseEntity<?> connectMarriedCode(@RequestHeader("Authorization") String token, @RequestBody MarriedCode marriedCode){
 
