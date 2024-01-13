@@ -65,7 +65,7 @@ public class DevelopController {
     private final VvueNotificationRepository vvueNotificationRepository;
     private final UserRepository userRepository;
 
-    @Operation(description ="강제 결혼(코드인증까지만 완료/추가 정보 입력 필요함)")
+    @Operation(summary ="강제 결혼(코드인증까지만 완료/추가 정보 입력 필요함)")
     @PostMapping("/force-marry/{spouseId}")
     public ResponseEntity<?> forceMarry(@RequestHeader("Authorization") String token,
         @PathVariable Long spouseId) {
@@ -90,7 +90,7 @@ public class DevelopController {
             "결혼 요청:userId " + userId + " " + spouseId + " 결혼 완료");
     }
 
-    @Operation(description = "강제 이혼 (스케줄/추억이 없는 경우만 가능)")
+    @Operation(summary = "강제 이혼 (스케줄/추억이 없는 경우만 가능)")
     @DeleteMapping("/divorce")
     public ResponseEntity<?> divorce(@RequestHeader("Authorization") String token) {
         Long userId = authService.getUserIdFromToken(token);
@@ -102,7 +102,7 @@ public class DevelopController {
     }
 
     @Deprecated
-    @Operation(description ="데이터 입력 : 개발 테스트", summary = "[사진만 DB에 미리 업로드하기]유저(1-8),결혼 1~4, 결혼일정/일반달반복일정/반복없음(1-9, 각 유저마다3가지), 추억(스케줄에 대해 홀수번 유저만 작성), 알림(1-6 유저의 결혼/달반복/반복없음에 존재)")
+    @Operation(summary ="데이터 입력 : 개발 테스트", description = "[사진만 DB에 미리 업로드하기]유저(1-8),결혼 1~4, 결혼일정/일반달반복일정/반복없음(1-9, 각 유저마다3가지), 추억(스케줄에 대해 홀수번 유저만 작성), 알림(1-6 유저의 결혼/달반복/반복없음에 존재)")
     @PostMapping("/for-test")
     public ResponseEntity<?> testGenearte() {
         //TODO
@@ -292,7 +292,7 @@ public class DevelopController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(description = "테스트 JWT 토큰 발급 (유저정보 확인하기): providerId = {providerId}")
+    @Operation(summary = "테스트 JWT 토큰 발급 (유저정보 확인하기): providerId = {providerId}")
     @GetMapping("/test-token-gen/{providerId}")
     public ResponseEntity<JwtDto> testTokenGen(@PathVariable Long providerId) {
         log.debug("[POST] /test-token-gen");
@@ -325,7 +325,7 @@ public class DevelopController {
         return new ResponseEntity<>(jwtDto, HttpStatus.OK);
     }
 
-    @Operation(description ="덤프 장소 데이터 추가")
+    @Operation(summary ="덤프 장소 데이터 추가")
     @PostMapping("/dump-place-data")
     public ResponseEntity<?> dumpPlaceData(@RequestHeader("Authorization")String token) {
         log.debug("[POST] /dump-place-data");
@@ -402,7 +402,7 @@ public class DevelopController {
         return responseEntity.getBody();
     }
 
-    @Operation(description = "덤프 장소 데이터 추가(param 추가)")
+    @Operation(summary = "덤프 장소 데이터 추가(param 추가)")
     @PostMapping("/dump-place-data-param")
     public ResponseEntity<?> selectDumpPlaceData(@RequestHeader("Authorization")String token, @RequestParam("x") Double x, @RequestParam("y") Double y, @RequestParam("code") String categoryCode) {
         log.debug("[POST] /dump-place-data-param");

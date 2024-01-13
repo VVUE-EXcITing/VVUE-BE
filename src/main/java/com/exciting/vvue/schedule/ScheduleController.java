@@ -54,7 +54,7 @@ public class ScheduleController {
     private final UserService userService;
 
     @GetMapping("/{scheduleId}")
-    @Operation(description ="일정 상세 조회", summary = "해당 일정 상세 정보를 조회한다.")
+    @Operation(summary ="일정 상세 조회", description = "해당 일정 상세 정보를 조회한다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
@@ -77,7 +77,7 @@ public class ScheduleController {
     }
 
     @PostMapping
-    @Operation(description ="일정 등록", summary = "일정을 등록한다.")
+    @Operation(summary ="일정 등록", description = "일정을 등록한다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
@@ -117,7 +117,7 @@ public class ScheduleController {
     }
 
     @PostMapping("/marry")
-    @Operation(description ="기념일 생일 등록", summary = "부부 가입 시 기념일 생일을 일정으로 등록한다.")
+    @Operation(summary ="기념일 생일 등록", description = "부부 가입 시 기념일 생일을 일정으로 등록한다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
@@ -131,7 +131,7 @@ public class ScheduleController {
     }
 
     @PutMapping("/{scheduleId}")
-    @Operation(description ="일정 수정", summary = "해당 일정을 수정한다.")
+    @Operation(summary ="일정 수정", description = "해당 일정을 수정한다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
@@ -171,7 +171,7 @@ public class ScheduleController {
     }
 
     @DeleteMapping("/{scheduleId}")
-    @Operation(description ="일정 삭제", summary = "해당 일정을 논리 삭제한다.")
+    @Operation(summary ="일정 삭제", description = "해당 일정을 논리 삭제한다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
@@ -211,7 +211,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/calendar")
-    @Operation(description ="달력 조회", summary = "해당 달의 일정 있는 날짜 리스트를 조회한다.")
+    @Operation(summary ="달력 조회", description = "해당 달의 일정 있는 날짜 리스트를 조회한다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
@@ -229,7 +229,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/calendar-daily")
-    @Operation(description ="특정 날짜 일정 조회", summary = "해당 날짜의 일정 리스트를 조회한다.")
+    @Operation(summary ="특정 날짜 일정 조회", description = "해당 날짜의 일정 리스트를 조회한다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
@@ -250,7 +250,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/dday")
-    @Operation(description ="D-DAY 일정 조회", summary = "예정된 일정 목록을 조회한다.")
+    @Operation(summary ="D-DAY 일정 조회", description = "예정된 일정 목록을 조회한다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")

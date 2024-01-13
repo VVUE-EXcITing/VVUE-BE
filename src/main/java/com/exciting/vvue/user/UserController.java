@@ -33,7 +33,7 @@ public class UserController {
     private final UserService userService;
     private final MarriedService marriedService;
 
-    @Operation(description ="모든 정보(부부연결유무/유저정보-성별,생일,닉네임")
+    @Operation(summary ="모든 정보(부부연결유무/유저정보-성별,생일,닉네임) 입력 여부 확인")
     @GetMapping("/all-info-updated")
     public ResponseEntity<?> isAllAuthenticated(@RequestHeader("Authorization") String token) {
         Long id = authService.getUserIdFromToken(token);
@@ -46,7 +46,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userAuthenticated);
     }
 
-    @Operation(description ="추가 정보(성별,생일,닉네임) 입력했는지 여부 확인")
+    @Operation(summary ="추가 정보(성별,생일,닉네임) 입력 여부 확인")
     @GetMapping("/user-info-updated")
     public ResponseEntity<?> isAuthenticated(@RequestHeader("Authorization") String token) {
         Long id = authService.getUserIdFromToken(token);
@@ -55,7 +55,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userAuthenticated);
     }
 
-    @Operation(description ="유저 정보 조회")
+    @Operation(summary ="유저 정보 조회")
     @GetMapping
     public ResponseEntity<UserDto> getUserInfoByToken(
         @RequestHeader("Authorization") String token) {
@@ -64,7 +64,7 @@ public class UserController {
         UserDto userResDto = userService.getUserDto(id);
         return new ResponseEntity<>(userResDto, HttpStatus.OK);
     }
-    @Operation(description ="유저 정보(성별,생일,닉네임,프로필사진ID) 수정")
+    @Operation(summary ="유저 정보(성별,생일,닉네임,프로필사진ID) 수정")
     @PutMapping
     public ResponseEntity<?> modify(@RequestHeader("Authorization") String token,
         @RequestBody UserModifyDto userModifyDto) {
@@ -73,7 +73,7 @@ public class UserController {
         userService.modifyUser(userId, userModifyDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @Operation(description ="[TODO] 유저 삭제")
+    @Operation(summary ="[TODO] 유저 삭제")
     @DeleteMapping
     public ResponseEntity<?> delete(@RequestHeader("Authorization") String token) {
         Long id = authService.getUserIdFromToken(token);

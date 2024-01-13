@@ -23,7 +23,7 @@ public class FavoritePlaceController {
     private final AuthService authService;
 
     @PostMapping
-    @Operation(description ="즐겨찾기 상태 변경", summary = "즐겨찾기의 상태를 변경한다.")
+    @Operation(summary ="즐겨찾기 상태 변경", description = "즐겨찾기의 상태를 변경한다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "202", description = "요청 성공, place 등록 필요")
@@ -52,7 +52,7 @@ public class FavoritePlaceController {
     }
 
     @PostMapping("/regist")
-    @Operation(description ="장소 등록 및 즐겨찾기 하기", summary = "장소를 등록하고 즐겨찾기한 상태로 변경.")
+    @Operation(summary ="장소 등록 및 즐겨찾기 하기", description = "장소를 등록하고 즐겨찾기한 상태로 변경.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")

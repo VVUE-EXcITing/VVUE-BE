@@ -20,6 +20,7 @@ public class SwaggerConfig {
         return GroupedOpenApi.builder()
                 .group("vvue apis")
                 .packagesToScan("com.exciting.vvue")
+                .packagesToExclude("com.exciting.vvue.develop")
                 .build();
     }
     @Bean

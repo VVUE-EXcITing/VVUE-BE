@@ -14,6 +14,8 @@ import com.exciting.vvue.user.model.User;
 import com.exciting.vvue.user.service.UserService;
 
 import java.util.Map;
+
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -34,7 +36,7 @@ public class AuthController {
 
     private final UserService userService;
     private final AuthService authService;
-
+    @Operation(summary = "로그인/회원 가입",description = "토큰 발급 됨")
     @PostMapping
     public ResponseEntity<JwtDto> loginOrRegister(@RequestBody SocialUser socialUser) {
         log.debug("[POST] /auth/" + socialUser.getProvider());
@@ -68,7 +70,7 @@ public class AuthController {
         }
         return new ResponseEntity<>(jwtDto, HttpStatus.OK);
     }
-
+    @Operation(summary = "accessToken 재발급")
     @PostMapping("/refresh-access-token")
     public ResponseEntity<JwtDto> refreshToken(@RequestHeader("refresh-token") String refreshToken)
         throws InvalidTokenException {

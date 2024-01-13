@@ -37,7 +37,7 @@ public class MemoryController {
     private final ScheduleService scheduleService;
     private final NotificationService notificationService;
 
-    @Operation(description ="추억 추가")
+    @Operation(summary ="추억 추가")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "400", description = "본인이 작성한 일정별 추억이 이미 존재함"),
@@ -73,7 +73,7 @@ public class MemoryController {
         return ResponseEntity.status(HttpStatus.OK).body(new MemoryCreateResDto(memoryId));
     }
 
-    @Operation(description = "특정 추억 조회", summary = "추억ID를 통해 특정 추억 조회")
+    @Operation(summary = "특정 추억 조회", description = "추억ID를 통해 특정 추억 조회")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "400", description = "추억ID에 해당하는 추억이 없음"),
@@ -87,13 +87,13 @@ public class MemoryController {
         MemoryResDto memoryResDto = memoryService.getById(scheduleMemoryId, user);
         return ResponseEntity.ok().body(memoryResDto);
     }
-    @Operation(description = "[TODO] 추억 수정", summary = "추억ID를 통해 특정 추억 수정")
+    @Operation(summary = "[TODO] 추억 수정", description = "추억ID를 통해 특정 추억 수정")
     @PutMapping("/{memoryId}") //TODO
     public ResponseEntity<?> editMemory(@PathVariable Long memoryId) {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(description = "추억 삭제")
+    @Operation(summary = "추억 삭제")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "400", description = "추억ID 잘못됨"),
@@ -106,7 +106,7 @@ public class MemoryController {
         memoryService.deleteById(memoryId, user);
         return ResponseEntity.ok().build();
     }
-    @Operation(description ="모든 추억 조회", summary = "앨범 썸네일")
+    @Operation(summary ="모든 추억 조회", description = "앨범 썸네일")
     @GetMapping
     public ResponseEntity<?> getAllMemory(@RequestHeader("Authorization") String token, Long nextCursor, int size) { //인스타
         Long userId = authService.getUserIdFromToken(token);

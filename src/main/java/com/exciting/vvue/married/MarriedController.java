@@ -41,7 +41,7 @@ public class MarriedController {
 	private final AuthService authService;
 	private final ScheduleService scheduleService;
 
-	@Operation(description = "user의 부부정보 가져오기")
+	@Operation(summary = "user의 부부정보 가져오기")
 	@ApiResponses({
 		@ApiResponse(responseCode  = "200", description = "성공", content= {@Content(schema = @Schema(implementation =  MarriedDto.class))}),
 		@ApiResponse(responseCode  = "404", description = "부부가 아님")
@@ -65,7 +65,7 @@ public class MarriedController {
 
 
 	@PutMapping("/info")
-	@Operation(description = "부부 정보 수정", summary = "결혼기념일 미수정시 null로, 사진 미수정시 0 이하의 값으로 보낼 것")
+	@Operation(summary = "부부 정보 수정", description = "결혼기념일 미수정시 null로, 사진 미수정시 0 이하의 값으로 보낼 것")
 	// @ApiImplicitParam(name = "marriedModifyDto", value = "marriedModifyDto")
 	public ResponseEntity<?> updateMarriedInfo(@RequestHeader("Authorization") String token, @RequestBody MarriedModifyDto marriedModifyDto){
 		Long id = authService.getUserIdFromToken(token);
@@ -100,7 +100,7 @@ public class MarriedController {
 //	}
 
 	@GetMapping("/is-married")
-	@Operation(description = "부부 정보가 있는지 확인", summary = "")
+	@Operation(summary = "부부 정보가 있는지 확인")
 	public ResponseEntity<?> isUserMarried(@RequestHeader("Authorization") String token){
 		Long userId = authService.getUserIdFromToken(token);
 		log.debug("[POST] /married/is-married : id " + userId);
