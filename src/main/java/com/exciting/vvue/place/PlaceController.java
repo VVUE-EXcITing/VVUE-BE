@@ -24,7 +24,7 @@ public class PlaceController {
     private final AuthService authService;
 
     @GetMapping("/{placeId}")
-    @Operation(description ="장소 조회", summary = "해당 장소 상세 정보 조회")
+    @Operation(summary ="장소 조회", description = "해당 장소 상세 정보 조회")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
@@ -37,7 +37,7 @@ public class PlaceController {
     }
 
     @PostMapping
-    @Operation(description ="장소 등록", summary = "장소를 등록한다.")
+    @Operation(summary ="장소 등록", description = "장소를 등록한다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
@@ -50,7 +50,7 @@ public class PlaceController {
     }
 
     @DeleteMapping("/{placeId}")
-    @Operation(description ="장소 삭제", summary = "장소를 삭제한다.")
+    @Operation(summary ="장소 삭제", description = "장소를 삭제한다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
@@ -64,7 +64,7 @@ public class PlaceController {
     }
 
     @GetMapping("/favorites")
-    @Operation(description ="즐겨찾는 장소 목록 조회", summary = "해당 유저의 즐겨찾는 장소 목록 조회")
+    @Operation(summary ="즐겨찾는 장소 목록 조회", description = "해당 유저의 즐겨찾는 장소 목록 조회")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")
@@ -80,7 +80,7 @@ public class PlaceController {
     }
 
     @GetMapping("/recommend")
-    @Operation(description="추천 장소 목록 조회", summary = "하둡을 통한 추천 장소 별점 순으로 조회")
+    @Operation(summary="추천 장소 목록 조회", description = "하둡을 통한 추천 장소 별점 순으로 조회")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "요청 성공")
             , @ApiResponse(responseCode = "400", description = "잘못된 필드, 값 요청")

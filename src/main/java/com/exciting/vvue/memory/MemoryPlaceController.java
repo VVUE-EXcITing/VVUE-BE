@@ -21,7 +21,7 @@ public class MemoryPlaceController {
 
     private final AuthService authService;
     @Deprecated
-    @Operation(description="[TODO] 추억 지도 조회")
+    @Operation(summary="[TODO] 추억 지도 조회")
     @GetMapping
     public ResponseEntity<?> searchMemoryPlace(@RequestHeader("Authorization") String token, @RequestParam(required = false) MemoryPlaceFindDto findCondition) {
         log.debug("[GET] /memory-place");
@@ -31,7 +31,7 @@ public class MemoryPlaceController {
     }
 
     @Deprecated
-    @Operation(description="[TODO] (특정 장소의) 모든 추억 조회")
+    @Operation(summary="[TODO] (특정 장소의) 모든 추억 조회")
     @GetMapping("/{placeId}")
     public ResponseEntity<?> searchMemoryPlace(@RequestHeader("Authorization")String token, @PathVariable Long placeId) {
         log.debug("[GET] /memory-place/" + placeId);
