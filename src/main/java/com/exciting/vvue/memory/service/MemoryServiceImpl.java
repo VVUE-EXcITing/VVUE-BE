@@ -55,17 +55,17 @@ public class MemoryServiceImpl implements MemoryService {
     public Long add(MemoryAddReqDto memoryAddReqDto, User user, Married userMarried) {
         Long scheduleId = memoryAddReqDto.getScheduleId();
 
-        Schedule schedule = scheduleRepository.findByIdAndMarriedId(scheduleId, userMarried.getId())
-            .orElseThrow(
-                () -> new ScheduleNotFoundException(
-                    "[부부ID]에 해당하는 [스케줄ID]가 존재하지 않습니다" + userMarried.getId() + " " + scheduleId));
+        scheduleRepository.findByIdAndMarriedId(scheduleId, userMarried.getId())
+                .orElseThrow(
+                        () -> new ScheduleNotFoundException(
+                                "[부부ID]에 해당하는 [스케줄ID]가 존재하지 않습니다" + userMarried.getId() + " " + scheduleId));
 
         // ScheduleMemory 저장
         ScheduleMemory scheduleMemory = scheduleMemoryRepository.findByScheduleIdAndMarriedId(
             scheduleId, userMarried.getId());
         if (scheduleMemory == null) { // 부부 중 아무도 작성하지 않음
             scheduleMemory = scheduleMemoryRepository.save(
-                ScheduleMemory.with(memoryAddReqDto, schedule, userMarried));
+                ScheduleMemory.with(memoryAddReqDto,  userMarried));
         }
 
         // UserMemory 저장

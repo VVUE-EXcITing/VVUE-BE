@@ -53,11 +53,11 @@ public class ScheduleMemory {
         this.married = married;
     }
 
-    public static ScheduleMemory with(MemoryAddReqDto memoryAddReqDto, Schedule schedule, Married married) {
+    public static ScheduleMemory with(MemoryAddReqDto memoryAddReqDto,  Married married) {
         return ScheduleMemory.builder()
             .scheduleId(memoryAddReqDto.getScheduleId())
-            .scheduleName(schedule.getScheduleName())
-            .scheduleDate(schedule.getScheduleDate())
+            .scheduleName(memoryAddReqDto.getScheduleName())
+            .scheduleDate(memoryAddReqDto.getScheduleDate())
             .married(married)
             .build();
     }

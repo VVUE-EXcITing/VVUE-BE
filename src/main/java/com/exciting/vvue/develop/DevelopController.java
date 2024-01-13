@@ -33,6 +33,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -247,6 +248,8 @@ public class DevelopController {
             for (int j = 0; j < schedule.size(); j++) {
                 MemoryAddReqDto memory2 = MemoryAddReqDto.builder()
                     .scheduleId(schedule.get(j).getId())
+                        .scheduleDate(LocalDate.parse(schedule.get(j).getScheduleDate()))
+                        .scheduleName(schedule.get(j).getScheduleName())
                     .comment("코멘트" + i)
                     .pictureId(pair[i] - 1)
                     .placeMemories(List.of(
@@ -431,6 +434,8 @@ public class DevelopController {
                     memoryService.add(MemoryAddReqDto.builder()
                             .pictureId(picture.getId())
                             .scheduleId(schedule.getId())
+                                    .scheduleName(schedule.getScheduleName())
+                                    .scheduleDate(schedule.getScheduleDate())
                             .comment("더미코멘트")
                             .placeMemories(placeMemoryReqDtoList)
                             .build(), user, married);
