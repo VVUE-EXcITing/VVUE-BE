@@ -18,11 +18,17 @@ public class SwaggerConfig {
     @Bean
     public GroupedOpenApi group(){
         return GroupedOpenApi.builder()
-                .group("main")
+                .group("vvue apis")
                 .packagesToScan("com.exciting.vvue")
                 .build();
     }
-
+    @Bean
+    public GroupedOpenApi developGroup() {
+        return GroupedOpenApi.builder()
+                .group("develop apis")
+                .packagesToScan("com.exciting.vvue.develop") // package 필터 설정
+                .build();
+    }
     @Bean
     public OpenAPI springOpenApi(){
         SecurityScheme securityScheme = new SecurityScheme()
